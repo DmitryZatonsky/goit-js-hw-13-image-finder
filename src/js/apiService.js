@@ -10,7 +10,5 @@ const perPage = 12;
 const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${searchQuery}&page=${pageNumber}&per_page=${perPage}&key=${MY_KEY}`;
 
   return fetch(url)
-    .then(responce => {
-      return responce.json();
-    })
+    .then(responce => responce.json())
 } 
