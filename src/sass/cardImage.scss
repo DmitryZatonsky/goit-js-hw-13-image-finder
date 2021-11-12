@@ -1,0 +1,16 @@
+.gallery__item {
+  list-style: none;
+  position: relative;
+}
+
+.photo-card {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.photo-card__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

@@ -1,20 +1,23 @@
 import './sass/main.scss';
-import galleryList from './templates/galleryList.hbs';
-import cardImage from './templates/cardImage.hbs';
+import cardImageTpl from './templates/cardImage.hbs';
 import apiService from './js/apiService';
 import object from './js/object.js';
 
-const searchImageInput = document.querySelector('#search-form__input')
-// const searchImageButton = document.querySelector('#search-form__button')
-const container = document.querySelector('.container')
+const refs = {
+  imageSearchForm: document.querySelector('#search-form'),
+  imageSearchInput: document.querySelector('#search-form__input'),
+  imageSearchBtn: document.querySelector('#search-form__button'),
+  // pictureListContainer: document.querySelector('.container'),
+  pictureListContainer: document.querySelector('.gallery'),
+}
 
-searchImageInput.addEventListener('change', onSearchImage)
+refs.imageSearchForm.addEventListener('submit', onSearchImage)
 
 function onSearchImage(event) {
-  return apiService(event)
-    .then(data => {
-      const arr = data.hits[0]
-      console.log(arr)
-      return container.insertAdjacentHTML('beforeend', cardImage(arr))
+  event.preventDefault();
+
+  apiService(event)
+    .then(hits => {
+      return refs.pictureListContainer.insertAdjacentHTML('beforeend', cardImageTpl(hits))
     })
 }
