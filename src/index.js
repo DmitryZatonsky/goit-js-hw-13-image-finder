@@ -7,6 +7,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 const refs = {
   imageSearchForm: document.querySelector('#search-form'),
   pictureListContainer: document.querySelector('.gallery'),
+  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 }
 const apiService = new ApiService();
 const myStack = new Stack({
@@ -14,7 +15,7 @@ const myStack = new Stack({
 });
 
 refs.imageSearchForm.addEventListener('submit', onSearchImage)
-// document.addEventListener('scroll', onLoadMore)
+refs.loadMoreBtn.addEventListener('click', onLoadMore)
 
 function onSearchImage(event) {
   event.preventDefault();
@@ -33,18 +34,20 @@ function resetMarkup() {
 }
 
 function onLoadMore() {
-  apiService.fetchImages();
-  // onScroll();
+  apiService.fetchImages()
+    .then(hits => {
+        return refs.pictureListContainer.insertAdjacentHTML('beforeend', cardImageTpl(hits))
+    })
+    .catch(onError)
+ onScroll();
 }
 
-// function onScroll() {
-//   let lastGalleryItem = document.querySelectorAll('.gallery__item');
-//   console.log(apiService.perPage)
-//   .scrollIntoView({
-//     block: "end",
-//     behavior: "smooth",
-//   });
-// }
+function onScroll() {
+  refs.loadMoreBtn.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
+}
 
 function onError() {
   error({
