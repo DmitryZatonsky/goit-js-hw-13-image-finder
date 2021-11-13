@@ -1,0 +1,40 @@
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.search-form__input {
+  display: flex;
+  text-align: center;
+  margin-right: 5px;
+
+  border-style: none;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px 0px #008080;
+
+  &:hover,
+  &:focus {
+    box-shadow: 1px 1px 10px 1px #008080;
+  }
+}
+
+.search-form__button {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+
+  border-style: none;
+  border-radius: 10px;
+
+  background-color: #008080;
+  color: #ffffff;
+
+  &:hover,
+  &:focus {
+    background-color: #ffffff;
+    color: #008080;
+    box-shadow: 1px 1px 10px 1px #008080;
+  }
+}
