@@ -15,7 +15,6 @@ export default class ApiService {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        // console.log(data.hits)
         this.pageNumber += 1;
         return data.hits;
       })
