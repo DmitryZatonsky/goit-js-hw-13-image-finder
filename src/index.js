@@ -15,7 +15,7 @@ const myStack = new Stack({
 });
 
 refs.imageSearchForm.addEventListener('submit', onSearchImage)
-refs.loadMoreBtn.addEventListener('click', onLoadMore)
+// refs.loadMoreBtn.addEventListener('click', onLoadMore)
 
 function onSearchImage(event) {
   event.preventDefault();
@@ -49,10 +49,17 @@ function onScroll() {
   });
 }
 
+document.addEventListener('scroll', () => {
+    const documentRect = document.documentElement.getBoundingClientRect();
+    if (documentRect.bottom < document.documentElement.clientHeight + 100) {
+        onLoadMore();
+    }
+})
+
 function onError() {
   error({
     title: 'Error!!!',
-    text: 'Давай по новой...',
+    text: 'To be continued...',
     stack: myStack,
   })
 }
